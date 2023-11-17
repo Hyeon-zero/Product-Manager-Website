@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" style="max-width: 850px">
+    <div class="py-5 text-center">
+      <h2 th:text="#{page.products}"></h2>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-sm-24 text-lg-end">
+        <button class="btn btn-primary" th:text="#{page.addProduct}"
+                th:onclick="|location.href='@{/views/products/add}'|"
+                type="button">
+        </button>
+
+        <button class="btn btn-danger" th:text="#{page.deleteProduct}"
+                th:onclick="|location.href='@{/views/products/delete}'|"
+                type="button">
+        </button>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+      <table class="table text-lg-center table-striped">
+        <thead>
+          <tr>
+            <th th:text="#{label.product.id}"></th>
+            <th th:text="#{label.product.productName}"></th>
+            <th th:text="#{label.product.price}"></th>
+            <th th:text="#{label.product.quantity}"></th>
+            <th th:text="#{label.product.registrationDate}"></th>
+            <th th:text="#{label.product.modifyingRegistrationDate}"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="product : ${products}">
+            <td>
+              <a href="product.html"
+                 th:href="@{/views/products/{productId} (productId=${product.id})}"
+                 th:text="${product.id}">제품 ID
+              </a>
+              </td>
+
+            <td>
+              <a href="product.html"
+                 th:href="@{|/views/products/${product.id}|}"
+                 th:text="${product.productName}">제품명
+              </a>
+            </td>
+
+            <td th:text="${product.priceFormat}">10000</td>
+            <td th:text="${product.quantityFormat}">10</td>
+            <td th:text="${product.getRegistrationDate}">2023-07-08</td>
+            <td th:text="${product.getModifyingRegistrationDate}">2023-07-08</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div> <!-- /container -->
+</body>
+
+</html>

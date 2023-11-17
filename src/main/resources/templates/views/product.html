@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="utf-8">
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 580px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="py-5 text-center">
+      <h2 th:text="#{page.product}"></h2>
+    </div>
+
+    <!-- 파라미터로 true가 넘어온다. -->
+    <h5 class="float-end text-primary"> <strong th:if="${param.status}" th:text="'저장 완료'"></strong></h5>
+
+    <div>
+      <label class="py-2" for="productId" th:text="#{label.product.id}"></label>
+      <input type="text" id="productId" name="productId" class="form-control" th:value="${product.id}" readonly>
+    </div>
+
+    <div>
+      <label class="py-2" for="productName" th:text="#{label.product.productName}"></label>
+      <input type="text" id="productName" name="productName" class="form-control" th:value="${product.productName}" readonly>
+    </div>
+
+    <div>
+      <label class="py-2" for="priceFormat" th:text="#{label.product.price}"></label>
+      <input type="text" id="priceFormat" name="priceFormat" class="form-control" th:value="${product.priceFormat}" readonly>
+    </div>
+
+    <div>
+      <label class="py-2" for="quantityFormat" th:text="#{label.product.quantity}"></label>
+      <input type="text" id="quantityFormat" name="quantityFormat" class="form-control" th:value="${product.quantityFormat}" readonly>
+    </div>
+
+    <div>
+      <label class="py-2" for="date" th:text="#{label.product.registrationDate}"></label>
+      <input type="text" id="date" name="date" class="form-control" th:value="${product.getRegistrationDate}" readonly>
+    </div>
+
+    <div>
+      <label class="py-2" for="modifyDate" th:text="#{label.product.modifyingRegistrationDate}"></label>
+      <input type="text" id="modifyDate" name="modifyDate" class="form-control" th:value="${product.getModifyingRegistrationDate}" readonly>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+      <div class="col">
+        <button class="w-100 btn btn-primary btn-lg"
+                th:onclick="|location.href='@{/views/products/{productId}/edit(productId=${product.id})}'|"
+                type="button" th:text="#{page.updateProductInfo}">
+        </button>
+      </div>
+
+      <div class="col">
+        <button class="w-100 btn btn-secondary btn-lg"
+                th:onclick="|location.href='@{/views/products}'|"
+                type="button" th:text="#{button.productList}"></button>
+      </div>
+
+    </div>
+
+  </div> <!-- /container -->
+</body>
+</html>
